@@ -53,7 +53,6 @@ Interface::Interface(rclcpp::Node *node, const std::string &interface_prefix,
 void Interface::command_handler_(
     const std::shared_ptr<brake::srv::Command::Request> request,
     std::shared_ptr<brake::srv::Command::Response> response) {
-  command_handler_real_(request, response);
 
   auto now = rclcpp::Time().nanoseconds();
   std_msgs::msg::UInt64 msg_now;
@@ -72,6 +71,8 @@ void Interface::command_handler_(
     RCLCPP_INFO(node_->get_logger(), "Disengaged the brake: %s",
                 interface_prefix_.c_str());
   }
+
+  command_handler_real_(request, response);
 }
 
 }  // namespace brake
