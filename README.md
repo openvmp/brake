@@ -9,4 +9,3 @@ But it's designed to be universal and usable independently from the rest of Open
 
 This package implements the interface to be used by all brake drivers.
 
-![ROS/ROS2 index package for OpenVMP module: brake](https://www.google-analytics.com/collect?v=1&tid=UA-242596187-2&cid=555&aip=1&t=event&ec=github&ea=md&dp=%2FREADME.md&dt=ROS2%20package%20for%20brakes%20driver)
