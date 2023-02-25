@@ -24,8 +24,7 @@ namespace brake {
 
 class Interface {
  public:
-  Interface(rclcpp::Node *node, const std::string &interface_prefix = "",
-            bool engaged_by_default = true);
+  Interface(rclcpp::Node *node, bool engaged_by_default = true);
   virtual ~Interface() {}
 
   static const std::string SRV_COMMAND;
@@ -34,9 +33,10 @@ class Interface {
 
  protected:
   rclcpp::Node *node_;
-
-  const std::string interface_prefix_;
+  rclcpp::Parameter interface_prefix_;
   bool engaged_;
+
+  std::string get_prefix_();
 
   virtual void command_handler_real_(
       const std::shared_ptr<brake::srv::Command::Request> request,

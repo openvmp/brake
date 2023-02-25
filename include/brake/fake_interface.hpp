@@ -25,8 +25,7 @@ namespace brake {
 
 class FakeInterface : public Interface {
  public:
-  FakeInterface(rclcpp::Node *node, const std::string &interface_prefix = "",
-                bool engaged_by_default = true);
+  FakeInterface(rclcpp::Node *node, bool engaged_by_default = true);
   virtual ~FakeInterface() = default;
 
  protected:

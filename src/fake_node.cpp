@@ -12,7 +12,7 @@
 namespace brake {
 
 FakeNode::FakeNode() : rclcpp::Node("brake_fake") {
-  intf_ = std::make_shared<FakeInterface>(this, this->get_namespace());
+  intf_ = std::make_shared<FakeInterface>(this);
 }
 
 }  // namespace brake

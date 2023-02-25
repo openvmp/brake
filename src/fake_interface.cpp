@@ -16,9 +16,8 @@
 namespace brake {
 
 FakeInterface::FakeInterface(rclcpp::Node *node,
-                             const std::string &interface_prefix,
                              bool engaged_by_default)
-    : Interface(node, interface_prefix, engaged_by_default) {}
+    : Interface(node, engaged_by_default) {}
 
 void FakeInterface::command_handler_real_(
     const std::shared_ptr<brake::srv::Command::Request> request,
