@@ -27,6 +27,9 @@ class Interface {
   Interface(rclcpp::Node *node, bool engaged_by_default = true);
   virtual ~Interface() {}
 
+  bool get_engaged() const { return engaged_; }
+  void set_engaged(bool engaged) { engaged_ = engaged; }
+
   static const std::string SRV_COMMAND;
   static const std::string PUB_LAST_CHANGED;
   static const std::string PUB_LAST_ENGAGED;
