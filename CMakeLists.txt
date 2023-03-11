@@ -39,11 +39,6 @@ set(fake_SOURCE_FILES
   src/fake.cpp
 )
 
-set(project_LIBRARIES
-  ${rclcpp_LIBRARIES}
- "${cpp_typesupport_target}"
-)
-
 set(project_DEPENDENCIES
   rclcpp
   std_msgs
@@ -60,7 +55,7 @@ install(TARGETS
 
 # Library target
 add_library(library ${project_SOURCE_FILES})
-target_link_libraries(library ${project_LIBRARIES})
+target_link_libraries(library ${rclcpp_LIBRARIES} "${cpp_typesupport_target}")
 ament_target_dependencies(library ${project_DEPENDENCIES})
 ament_export_targets(${PROJECT_NAME}_library HAS_LIBRARY_TARGET)
 ament_export_dependencies(${project_DEPENDENCIES})
