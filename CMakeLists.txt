@@ -36,7 +36,7 @@ set(fake_SOURCE_FILES
   ${project_SOURCE_FILES}
   src/fake_interface.cpp
   src/fake_node.cpp
-  src/fake.cpp
+  src/fake_factory.cpp
 )
 
 set(project_DEPENDENCIES
@@ -45,7 +45,7 @@ set(project_DEPENDENCIES
 )
 
 # Executable target
-add_executable("fake" ${fake_SOURCE_FILES})
+add_executable("fake" src/fake.cpp ${fake_SOURCE_FILES})
 target_link_libraries("fake" ${rclcpp_LIBRARIES} "${cpp_typesupport_target}")
 ament_target_dependencies("fake" ${project_DEPENDENCIES})
 install(TARGETS
@@ -58,12 +58,21 @@ add_library(library ${project_SOURCE_FILES})
 target_link_libraries(library ${rclcpp_LIBRARIES} "${cpp_typesupport_target}")
 ament_target_dependencies(library ${project_DEPENDENCIES})
 ament_export_targets(${PROJECT_NAME}_library HAS_LIBRARY_TARGET)
-ament_export_dependencies(${project_DEPENDENCIES})
-ament_export_include_directories(include)
 install(TARGETS library
   EXPORT ${PROJECT_NAME}_library
   LIBRARY DESTINATION lib
 )
+add_library(fake_library ${fake_SOURCE_FILES})
+target_link_libraries(fake_library ${rclcpp_LIBRARIES} "${cpp_typesupport_target}")
+ament_target_dependencies(fake_library ${project_DEPENDENCIES})
+ament_export_targets(${PROJECT_NAME}_fake_library HAS_LIBRARY_TARGET)
+install(TARGETS fake_library
+  EXPORT ${PROJECT_NAME}_fake_library
+  LIBRARY DESTINATION lib
+)
+
+ament_export_dependencies(${project_DEPENDENCIES})
+ament_export_include_directories(include)
 install(
   DIRECTORY include/${PROJECT_NAME}/
   DESTINATION include/${PROJECT_NAME}
