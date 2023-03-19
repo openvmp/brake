@@ -39,14 +39,24 @@ Interface::Interface(rclcpp::Node *node, bool engaged_by_default)
       ::rmw_qos_profile_default, callback_group_);
   RCLCPP_DEBUG(node_->get_logger(), "Created the service...");
 
+  rmw_qos_profile_t rmw = {
+      .history = rmw_qos_history_policy_t::RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+      .depth = 1,
+      .reliability =
+          rmw_qos_reliability_policy_t::RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT,
+      .durability = RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL,
+      .deadline = {0, 50000000},
+      .lifespan = {0, 50000000},
+      .liveliness = RMW_QOS_POLICY_LIVELINESS_AUTOMATIC,
+      .liveliness_lease_duration = {0, 0},
+      .avoid_ros_namespace_conventions = false,
+  };
+  auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(rmw), rmw);
+
   last_changed_ = node->create_publisher<std_msgs::msg::UInt64>(
-      prefix + PUB_LAST_CHANGED,
-      rmw_qos_reliability_policy_t::RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT |
-          rmw_qos_history_policy_t::RMW_QOS_POLICY_HISTORY_KEEP_LAST);
+      prefix + PUB_LAST_CHANGED, qos);
   last_engaged_ = node->create_publisher<std_msgs::msg::Bool>(
-      prefix + PUB_LAST_ENGAGED,
-      rmw_qos_reliability_policy_t::RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT |
-          rmw_qos_history_policy_t::RMW_QOS_POLICY_HISTORY_KEEP_LAST);
+      prefix + PUB_LAST_ENGAGED, qos);
   RCLCPP_DEBUG(node_->get_logger(), "Created the publisher...");
 
   std_msgs::msg::Bool msg_engaged;
