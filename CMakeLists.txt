@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(brake)
+project(remote_brake)
 
 # Compiler settings
 if(NOT CMAKE_CXX_STANDARD)

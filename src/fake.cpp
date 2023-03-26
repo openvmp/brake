@@ -7,12 +7,12 @@
  * Licensed under Apache License, Version 2.0.
  */
 
-#include "brake/fake_node.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "remote_brake/fake_node.hpp"
 
 int main(int argc, char **argv) {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<brake::FakeNode>();
+  auto node = std::make_shared<remote_brake::FakeNode>();
 
   rclcpp::executors::MultiThreadedExecutor exec;
   exec.add_node(node);

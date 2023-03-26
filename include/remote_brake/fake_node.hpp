@@ -13,10 +13,10 @@
 #include <memory>
 #include <string>
 
-#include "brake/fake_interface.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "remote_brake/fake_interface.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 class FakeNode : public rclcpp::Node {
  public:
@@ -25,6 +25,6 @@ class FakeNode : public rclcpp::Node {
   std::shared_ptr<FakeInterface> intf_;
 };
 
-}  // namespace brake
+}  // namespace remote_brake
 
 #endif  // OPENVMP_BRAKE_FAKE_NODE_H

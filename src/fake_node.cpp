@@ -7,12 +7,12 @@
  * Licensed under Apache License, Version 2.0.
  */
 
-#include "brake/fake_node.hpp"
+#include "remote_brake/fake_node.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 FakeNode::FakeNode() : rclcpp::Node("brake_fake") {
   intf_ = std::make_shared<FakeInterface>(this);
 }
 
-}  // namespace brake
+}  // namespace remote_brake

@@ -7,13 +7,13 @@
  * Licensed under Apache License, Version 2.0.
  */
 
-#include "brake/fake_factory.hpp"
+#include "remote_brake/fake_factory.hpp"
 
 #include <exception>
 
-#include "brake/fake_interface.hpp"
+#include "remote_brake/fake_interface.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 std::shared_ptr<Interface> FakeFactory::New(rclcpp::Node *node) {
   rclcpp::Parameter use_remote;
@@ -37,4 +37,4 @@ std::shared_ptr<Interface> FakeFactory::New(rclcpp::Node *node) {
   }
 }
 
-}  // namespace brake
+}  // namespace remote_brake

@@ -14,13 +14,13 @@
 #include <memory>
 #include <string>
 
-#include "brake/srv/command.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "remote_brake/srv/command.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "std_msgs/msg/u_int64.hpp"
 #include "std_msgs/msg/u_int8.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 class Interface {
  public:
@@ -42,22 +42,21 @@ class Interface {
   std::string get_prefix_();
 
   virtual void command_handler_real_(
-      const std::shared_ptr<brake::srv::Command::Request> request,
-      std::shared_ptr<brake::srv::Command::Response> response) = 0;
+      const std::shared_ptr<srv::Command::Request> request,
+      std::shared_ptr<srv::Command::Response> response) = 0;
 
  private:
   rclcpp::CallbackGroup::SharedPtr callback_group_;
-  rclcpp::Service<brake::srv::Command>::SharedPtr command_;
+  rclcpp::Service<srv::Command>::SharedPtr command_;
 
   std::mutex lock_;
   rclcpp::Publisher<std_msgs::msg::UInt64>::SharedPtr last_changed_;
   rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr last_engaged_;
 
-  void command_handler_(
-      const std::shared_ptr<brake::srv::Command::Request> request,
-      std::shared_ptr<brake::srv::Command::Response> response);
+  void command_handler_(const std::shared_ptr<srv::Command::Request> request,
+                        std::shared_ptr<srv::Command::Response> response);
 };
 
-}  // namespace brake
+}  // namespace remote_brake
 
 #endif  // OPENVMP_BRAKE_INTERFACE_H

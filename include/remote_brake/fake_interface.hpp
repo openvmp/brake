@@ -14,14 +14,14 @@
 #include <memory>
 #include <string>
 
-#include "brake/interface.hpp"
-#include "brake/srv/command.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "remote_brake/interface.hpp"
+#include "remote_brake/srv/command.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "std_msgs/msg/u_int64.hpp"
 #include "std_msgs/msg/u_int8.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 class FakeInterface : public Interface {
  public:
@@ -30,10 +30,10 @@ class FakeInterface : public Interface {
 
  protected:
   virtual void command_handler_real_(
-      const std::shared_ptr<brake::srv::Command::Request> request,
-      std::shared_ptr<brake::srv::Command::Response> response) override;
+      const std::shared_ptr<srv::Command::Request> request,
+      std::shared_ptr<srv::Command::Response> response) override;
 };
 
-}  // namespace brake
+}  // namespace remote_brake
 
 #endif  // OPENVMP_BRAKE_FAKE_INTERFACE_H

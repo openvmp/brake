@@ -7,13 +7,13 @@
  * Licensed under Apache License, Version 2.0.
  */
 
-#include "brake/interface.hpp"
+#include "remote_brake/interface.hpp"
 
 #include <functional>
 
-#include "brake/srv/command.hpp"
+#include "remote_brake/srv/command.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 const std::string Interface::SRV_COMMAND = "/command";
 const std::string Interface::PUB_LAST_CHANGED = "/last_changed";
@@ -32,7 +32,7 @@ Interface::Interface(rclcpp::Node *node, bool engaged_by_default)
       node->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
 
   auto prefix = get_prefix_();
-  command_ = node_->create_service<brake::srv::Command>(
+  command_ = node_->create_service<srv::Command>(
       prefix + SRV_COMMAND,
       std::bind(&Interface::command_handler_, this, std::placeholders::_1,
                 std::placeholders::_2),
@@ -76,8 +76,8 @@ std::string Interface::get_prefix_() {
 }
 
 void Interface::command_handler_(
-    const std::shared_ptr<brake::srv::Command::Request> request,
-    std::shared_ptr<brake::srv::Command::Response> response) {
+    const std::shared_ptr<srv::Command::Request> request,
+    std::shared_ptr<srv::Command::Response> response) {
   auto now = rclcpp::Time().nanoseconds();
   std_msgs::msg::UInt64 msg_now;
   msg_now.data = now;
@@ -100,4 +100,4 @@ void Interface::command_handler_(
   command_handler_real_(request, response);
 }
 
-}  // namespace brake
+}  // namespace remote_brake

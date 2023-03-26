@@ -7,21 +7,20 @@
  * Licensed under Apache License, Version 2.0.
  */
 
-#include "brake/fake_interface.hpp"
+#include "remote_brake/fake_interface.hpp"
 
 #include <functional>
 
-#include "brake/srv/command.hpp"
+#include "remote_brake/srv/command.hpp"
 
-namespace brake {
+namespace remote_brake {
 
-FakeInterface::FakeInterface(rclcpp::Node *node,
-                             bool engaged_by_default)
+FakeInterface::FakeInterface(rclcpp::Node *node, bool engaged_by_default)
     : Interface(node, engaged_by_default) {}
 
 void FakeInterface::command_handler_real_(
-    const std::shared_ptr<brake::srv::Command::Request> request,
-    std::shared_ptr<brake::srv::Command::Response> response) {
+    const std::shared_ptr<srv::Command::Request> request,
+    std::shared_ptr<srv::Command::Response> response) {
   (void)request;
   (void)response;
 
@@ -29,4 +28,4 @@ void FakeInterface::command_handler_real_(
   return;
 }
 
-}  // namespace brake
+}  // namespace remote_brake

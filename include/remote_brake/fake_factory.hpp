@@ -12,16 +12,16 @@
 
 #include <memory>
 
-#include "brake/interface.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "remote_brake/interface.hpp"
 
-namespace brake {
+namespace remote_brake {
 
 class FakeFactory {
  public:
-  static std::shared_ptr<brake::Interface> New(rclcpp::Node *node);
+  static std::shared_ptr<Interface> New(rclcpp::Node *node);
 };
 
-}  // namespace brake
+}  // namespace remote_brake
 
 #endif  // OPENVMP_BRAKE_FAKE_FACTORY_H
